@@ -32,16 +32,61 @@ void inserttoend (int val)//20
 
      newnode->data=val;
      newnode->next=NULL;
-     newnode->prev=head;
+     
 
-     if (head!=NULL)
+     if (head==NULL)
     {
-        head->next=newnode;
+        head=newnode;
+        newnode->prev=NULL;
+        return;
+
+
+    }
+    struct Node *temp=head;
+
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+
     }
 
-    head=newnode;
+    newnode->prev=temp;
+    temp->next=newnode;
 
 }
+
+void serach(int val)
+{
+    struct Node *temp=head;
+    int count=0;
+
+    while (temp!=NULL)
+    {
+        count++;
+       
+
+        if(temp->data==val)
+        {
+            printf("\n Data  Found at %d",count);
+          
+          
+            return;
+        }
+         
+        temp=temp->next;
+         
+       
+
+        
+      
+    }
+
+    printf("\n Data Not Found ");
+    
+
+}
+
+
 
 void deletefrombegin()
 {
@@ -53,6 +98,13 @@ void deletefrombegin()
 
     }
 
+    if(head->next==NULL)
+    {
+        head=NULL;
+        free(temp);
+        return;
+    }
+
     head=temp->next;
     head->prev=NULL;
     free(temp);
@@ -61,9 +113,46 @@ void deletefrombegin()
 }
 
 
-void display()
+void deleteend()
 {
     
+    
+    if (head==NULL)
+    {
+        printf("\n List is empty");
+    }
+    struct Node *temp=head;
+
+
+    if(head->next==NULL)
+    {
+        head=NULL;
+        free(temp);
+        return;
+    }
+
+    
+
+     while(temp->next!=NULL)
+    {
+        temp=temp->next;
+
+    }
+
+    //temp=a400
+
+    temp->prev->next=NULL;
+    free(temp);
+    
+    
+
+
+
+}
+
+void display()
+{
+    printf("\n");
 
     if(head==NULL)
     {
@@ -80,26 +169,7 @@ void display()
    }
 }
 
-void display1()
-{
-    
 
-    if(head==NULL)
-    {
-        printf("LIST IS EMPTY");
-        return;
-    }
-
-   struct Node *temp=head;
-
-   while (temp!=NULL)
-   {
-    temp=temp->prev;
-    printf("\n Insert to end");
-    printf("\n %d ->",temp->data);
-    
-   }
-}
 
 int main()
 {
@@ -117,7 +187,30 @@ int main()
     inserttoend(30);
     inserttoend(40);
 
-    display1();
+    display();
+    inserttobegin(99);
+    display();
+    serach(99);
+    
+    // deletefrombegin();
+    // display();
+    // deleteend();
+    // display();
+    // deletefrombegin();   
+    // display();
+    // deleteend();
+    // display();
+    // deleteend();
+    // display();
+    // deletefrombegin();
+    // display();
+    // deletefrombegin();
+    // display();
+    // deletefrombegin();
+    // display();
+    // deletefrombegin();
+    // display();
+
 
     return 0;
     
